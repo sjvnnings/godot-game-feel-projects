@@ -1,0 +1,56 @@
+[gd_resource type="AudioBusLayout" load_steps=6 format=2]
+
+[sub_resource type="AudioEffectLowPassFilter" id=3]
+resource_name = "LowPassFilter"
+cutoff_hz = 100.0
+resonance = 1.0
+
+[sub_resource type="AudioEffectChorus" id=4]
+resource_name = "Chorus"
+voice_count = 3
+dry = 0.66
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+
+[sub_resource type="AudioEffectDistortion" id=8]
+resource_name = "Distortion"
+drive = 0.6
+
+[sub_resource type="AudioEffectEQ" id=5]
+resource_name = "EQ"
+band_db/32_hz = -16.0
+band_db/100_hz = -16.0
+band_db/320_hz = -8.0
+band_db/1000_hz = -8.0
+
+[sub_resource type="AudioEffectDistortion" id=7]
+resource_name = "Distortion"
+drive = 0.4
+
+[resource]
+bus/1/name = "Impact"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0294876
+bus/1/send = "Master"
+bus/1/effect/0/effect = SubResource( 3 )
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource( 4 )
+bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource( 8 )
+bus/1/effect/2/enabled = true
+bus/2/name = "Weaker Impact"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 5 )
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource( 7 )
+bus/2/effect/1/enabled = true

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://particles/particle_materials/MAT_PARTICLES_blood_drops.tres" type="Material" id=1]
+[ext_resource path="res://materials/MAT_generic_vertex_as_albedo.tres" type="Material" id=2]
+
+[sub_resource type="SphereMesh" id=7]
+material = ExtResource( 2 )
+radius = 0.05
+height = 0.25
+radial_segments = 8
+rings = 4
+
+[node name="blood_particles" type="Particles"]
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+speed_scale = 16.0
+local_coords = false
+process_material = ExtResource( 1 )
+draw_pass_1 = SubResource( 7 )

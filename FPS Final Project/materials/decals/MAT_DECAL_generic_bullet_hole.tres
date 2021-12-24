@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://textures/decals/bullet_hole.png" type="Texture" id=1]
+[ext_resource path="res://addons/decalco/src/Decal.shader" type="Shader" id=2]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/albedo_tint = Color( 1, 1, 1, 1 )
+shader_param/emission_tint = Color( 0, 0, 0, 1 )
+shader_param/emission_strength = 1.0
+shader_param/occlusion_strength = 1.0
+shader_param/specular_strength = 1.0
+shader_param/metallic_strength = 1.0
+shader_param/animation_speed = 1.0
+shader_param/flipbook_columns_count = 1
+shader_param/one_shot = false
+shader_param/start_time = null
+shader_param/current_frame_blend = 0.0
+shader_param/use_normal_map = false
+shader_param/albedo = ExtResource( 1 )

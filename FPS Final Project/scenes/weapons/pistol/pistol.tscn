@@ -1,0 +1,159 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/weapons/pistol/pistol.gd" type="Script" id=1]
+[ext_resource path="res://materials/weapons/MAT_pistol.tres" type="Material" id=2]
+[ext_resource path="res://audio/sfx/weapon/SFX_pistol_fire.ogg" type="AudioStream" id=3]
+[ext_resource path="res://scenes/weapons/shared/muzzle_flash.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/utilities/camera_shake/trauma_causer.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 0.1, 0.1, 0.4 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 0.1, 0.1, 0.1 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 0.05, 0.05, 0.018 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.414, -0.209, 0.787 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("muzzle_point/muzzle_flash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "fire"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.414, -0.209, 0.787 ), Vector3( -0.414, -0.156047, 0.427476 ), Vector3( -0.414, -0.209, 0.787 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -27.969, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("muzzle_point/muzzle_flash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="SphereShape" id=9]
+
+[node name="pistol" type="Spatial"]
+script = ExtResource( 1 )
+fire_delay = 0.0
+
+[node name="pistol_model" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.414, -0.209, 0.787 )
+
+[node name="barrel" type="MeshInstance" parent="pistol_model"]
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="handle" type="MeshInstance" parent="pistol_model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.15 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../barrel")
+material/0 = ExtResource( 2 )
+
+[node name="back" type="MeshInstance" parent="pistol_model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0441957, -0.14661 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../barrel")
+material/0 = ExtResource( 2 )
+
+[node name="muzzle" type="MeshInstance" parent="pistol_model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00347216, 0.201729 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../barrel")
+material/0 = ExtResource( 2 )
+
+[node name="muzzle_point" type="Spatial" parent="pistol_model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98023e-08, 0, 0.229411 )
+
+[node name="muzzle_flash" parent="pistol_model/muzzle_point" instance=ExtResource( 4 )]
+transform = Transform( -4.95966e-09, 0, 0.113464, 0, 0.113464, 0, -0.217933, 0, -9.52616e-09, -5.96046e-08, 0, 0.193813 )
+visible = false
+
+[node name="anim" type="AnimationPlayer" parent="pistol_model"]
+anims/RESET = SubResource( 8 )
+anims/fire = SubResource( 7 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.219854 )
+cast_to = Vector3( 0, -100, 0 )
+collision_mask = 5
+
+[node name="fire_delay" type="Timer" parent="."]
+one_shot = true
+
+[node name="fire_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -8.0
+
+[node name="trauma_causer" parent="." instance=ExtResource( 5 )]
+trauma_amount = 0.2
+
+[node name="CollisionShape" type="CollisionShape" parent="trauma_causer"]
+shape = SubResource( 9 )
+
+[connection signal="timeout" from="fire_delay" to="." method="_on_fire_delay_timeout"]

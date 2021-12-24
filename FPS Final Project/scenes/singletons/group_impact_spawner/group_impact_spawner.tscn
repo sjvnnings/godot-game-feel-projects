@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/singletons/group_impact_spawner/group_impact_spawner.gd" type="Script" id=1]
+[ext_resource path="res://scenes/singletons/group_impact_spawner/group_effect_association.gd" type="Script" id=2]
+[ext_resource path="res://scenes/effects/impact/enemy_hit_effect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/effects/impact/generic_impact_effect.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+group_name = "EFFECT_flesh"
+effect = ExtResource( 3 )
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+group_name = "EFFECT_wall"
+effect = ExtResource( 4 )
+
+[node name="group_impact_spawner" type="Node"]
+script = ExtResource( 1 )
+effect_associations = [ SubResource( 1 ), SubResource( 2 ) ]

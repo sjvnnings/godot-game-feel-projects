@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/helpers/oneshot_spatial_with_timer.gd" type="Script" id=1]
+[ext_resource path="res://scripts/helpers/oneshot_spatial_audio.gd" type="Script" id=2]
+[ext_resource path="res://particles/blood_particles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/sfx/impacts/SFX_BASS_fleshy_impact.wav" type="AudioStream" id=4]
+[ext_resource path="res://scripts/helpers/oneshot_particles.gd" type="Script" id=5]
+[ext_resource path="res://scenes/effects/physical/gib_spawner.tscn" type="PackedScene" id=6]
+
+[node name="enemy_hit_effect" type="Spatial"]
+script = ExtResource( 1 )
+lifetime = 5.0
+
+[node name="blood_particles" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 5 )
+
+[node name="hit_noise" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 8.0
+unit_size = 10.0
+autoplay = true
+script = ExtResource( 2 )
+
+[node name="gib_spawner" parent="." instance=ExtResource( 6 )]
+lifetime = 0.0

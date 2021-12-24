@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/gameplay/health_bar/health_bar.gd" type="Script" id=1]
+[ext_resource path="res://textures/HUD/health_bar.png" type="Texture" id=2]
+
+[node name="health_bar" type="Sprite3D"]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -0.00448179, 1.22502, 0.00889063 )
+billboard = 1
+texture = ExtResource( 2 )
+hframes = 3
+script = ExtResource( 1 )

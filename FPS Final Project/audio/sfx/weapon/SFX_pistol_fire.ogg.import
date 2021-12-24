@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_pistol_fire.ogg-72c8cf48484bbd1b64ea503ec2967b21.oggstr"
+
+[deps]
+
+source_file="res://audio/sfx/weapon/SFX_pistol_fire.ogg"
+dest_files=[ "res://.import/SFX_pistol_fire.ogg-72c8cf48484bbd1b64ea503ec2967b21.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

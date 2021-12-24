@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/effects/physical/physics_gib.gd" type="Script" id=1]
+[ext_resource path="res://materials/MAT_gib.tres" type="Material" id=2]
+
+[sub_resource type="PrismMesh" id=11]
+left_to_right = 0.3
+size = Vector3( 0.25, 0.25, 0.125 )
+
+[node name="physics_gib" type="Spatial"]
+script = ExtResource( 1 )
+gravity = -39.24
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 11 )
+material/0 = ExtResource( 2 )

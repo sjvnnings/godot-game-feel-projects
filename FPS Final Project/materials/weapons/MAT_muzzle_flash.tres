@@ -1,0 +1,21 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://textures/effects/flash.png" type="Texture" id=1]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 23
+load_path = "res://.import/flash.png-5d123b8de9655f671b0782a18040f3c5.s3tc.stex"
+
+[resource]
+resource_name = "Material.001"
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 1 )
+roughness = 0.5
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 5.0
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = SubResource( 1 )

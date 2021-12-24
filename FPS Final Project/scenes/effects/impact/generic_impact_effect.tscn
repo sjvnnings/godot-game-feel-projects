@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://materials/decals/MAT_DECAL_generic_bullet_hole.tres" type="Material" id=2]
+[ext_resource path="res://scripts/helpers/oneshot_spatial_audio.gd" type="Script" id=3]
+[ext_resource path="res://audio/sfx/impacts/SFX_wood_impact.ogg" type="AudioStream" id=4]
+[ext_resource path="res://particles/generic_impact_particles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/helpers/oneshot_particles.gd" type="Script" id=6]
+
+[sub_resource type="CubeMesh" id=8]
+
+[node name="generic_impact_effect" type="Spatial"]
+
+[node name="generic_impact" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 8.0
+unit_size = 10.0
+autoplay = true
+script = ExtResource( 3 )
+
+[node name="Particles" parent="." instance=ExtResource( 5 )]
+script = ExtResource( 6 )
+
+[node name="bullet_hole_decal" type="MeshInstance" parent="."]
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0 )
+cast_shadow = 0
+mesh = SubResource( 8 )
+material/0 = ExtResource( 2 )

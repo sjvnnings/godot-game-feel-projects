@@ -1,0 +1,196 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/enemies/enemy.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gameplay/health_bar/health_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://materials/MAT_enemy.tres" type="Material" id=3]
+[ext_resource path="res://scripts/helpers/oneshot_spatial_audio.gd" type="Script" id=4]
+[ext_resource path="res://audio/sfx/impacts/SFX_BASS_fleshy_impact.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/utilities/camera_shake/trauma_causer.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.5
+height = 0.88
+
+[sub_resource type="CapsuleMesh" id=7]
+radius = 0.5
+mid_height = 0.88
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_unshaded = true
+
+[sub_resource type="SpatialMaterial" id=12]
+flags_unshaded = true
+albedo_color = Color( 0.92549, 0.615686, 0.133333, 1 )
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("default_mesh:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("white_flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("red_flash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "hit"
+length = 0.126
+step = 0.063
+tracks/0/type = "value"
+tracks/0/path = NodePath("default_mesh:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.126 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("white_flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.063 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("red_flash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.063, 0.126 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("white_flash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("default_mesh:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="SphereShape" id=13]
+radius = 15.0
+
+[node name="enemy" type="RigidBody" groups=["EFFECT_flesh"]]
+collision_layer = 4
+collision_mask = 3
+mode = 2
+mass = 20.0
+gravity_scale = 2.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+death_velocity_magnitude = 10.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="health_bar" parent="." instance=ExtResource( 2 )]
+
+[node name="visuals" type="Spatial" parent="."]
+
+[node name="default_mesh" type="MeshInstance" parent="visuals"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 3 )
+
+[node name="white_flash" type="MeshInstance" parent="visuals"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 8 )
+
+[node name="red_flash" type="MeshInstance" parent="visuals"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 12 )
+
+[node name="anim" type="AnimationPlayer" parent="visuals"]
+anims/RESET = SubResource( 10 )
+anims/hit = SubResource( 9 )
+anims/idle = SubResource( 11 )
+
+[node name="death_noise" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 5 )
+unit_db = 32.0
+unit_size = 30.0
+bus = "Impact"
+script = ExtResource( 4 )
+
+[node name="death_shake_area" parent="." instance=ExtResource( 6 )]
+trauma_amount = 0.5
+
+[node name="CollisionShape" type="CollisionShape" parent="death_shake_area"]
+shape = SubResource( 13 )
+
+[connection signal="damage_taken" from="." to="health_bar" method="lower_health"]
+[connection signal="died" from="." to="death_shake_area" method="cause_trauma"]
+[connection signal="health_depleted" from="health_bar" to="." method="_on_health_depleted"]

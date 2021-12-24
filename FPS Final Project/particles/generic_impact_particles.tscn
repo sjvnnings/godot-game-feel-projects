@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://particles/particle_materials/MAT_PARTICLES_generic_impact_chips.tres" type="Material" id=1]
+[ext_resource path="res://materials/MAT_generic_vertex_as_albedo.tres" type="Material" id=2]
+
+[sub_resource type="PrismMesh" id=2]
+material = ExtResource( 2 )
+left_to_right = 0.8
+size = Vector3( 0.1, 0.1, 0.025 )
+
+[node name="Particles" type="Particles"]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = ExtResource( 1 )
+draw_pass_1 = SubResource( 2 )
