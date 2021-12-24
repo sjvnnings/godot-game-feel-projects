@@ -1,2 +1,2 @@
-# godot-game-feel-projects
- The base and final example projects for my "Satisfying 3D Game Feel" series on YouTube
+# Satisfying 3D Game Feel in Godot
+ This repository hosts the base and final projects for my "Satisfying 3D Game Feel" Godot series on YouTube. All code is MIT license.
